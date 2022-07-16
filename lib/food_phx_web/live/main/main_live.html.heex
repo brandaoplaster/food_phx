@@ -38,13 +38,13 @@
       <h1 class="text-3xl md:text-6xl font-bold">
         We are waiting for you!!!
       </h1>
-      <button class="px-6 py-2 rounded-full text-white font-bold mt-5 btn-primary bg-black">
+      <button class="px-6 py-2 rounded-full text-white font-bold mt-5 btn-primary bg-orange-500">
         Order new
       </button>
     </div>
 
     <div class="w-1/2" id="hero-info-image">
-      <img src="" alt="">
+      <img src={Routes.static_path(@socket, "/images/hero.svg")} alt="">
     </div>
   </div>
 </section>
@@ -58,7 +58,7 @@
     <%= for _ <- 0..10 do %>
 
     <div class="lg:w-64 shadow-lg rounded-lg p-4">
-      <img src="" alt="" class="h-40 mb-4 mx-auto">
+      <img src={Routes.static_path(@socket, "/images/item.svg")} alt="" class="h-40 mb-4 mx-auto">
       <div class="text-center">
         <h2 class="mb-4 text-lg">
           Name Product
