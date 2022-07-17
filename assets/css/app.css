@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #ff761a;
+  --primary-hover: #e76a17;
+  --seconary: #ffc82a;
+  --third: #f8f8f8;
+  --pure: #ffffff;
+  --dark: #0c0c0c;
+  --gray: #cccccc;
+  --smooth: all .3s ease-in-out;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  --webkit-font-smoothing: antialiased;
+  color: var(--dark);
+}
+
+nav li:last-child a{
+  background-color: var(--primary);
+  color: var(--pure);
+}
+
+nav li:last-child a:hover{
+  background-color: var(--primary-hover);
+  color: var(--pure);
+}
+
+nav li a {
+  transition: var(--smooth);
+}
+
+nav li a:hover {
+  color: var(--primary);
+}
+
+section.hero{
+  background: var(--third);
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
