@@ -1,31 +1,3 @@
 <.live_component module={Hero} id="hero-componet" />
 
-<div class="menu container mx-auto py-8">
-  <h1 class="text-xl font-bold mb-8">
-    All Foods
-  </h1>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
-
-    <%= for _ <- 0..10 do %>
-
-    <div class="lg:w-64 shadow-lg rounded-lg p-4">
-      <img src={Routes.static_path(@socket, "/images/item.svg")} alt="" class="h-40 mb-4 mx-auto">
-      <div class="text-center">
-        <h2 class="mb-4 text-lg">
-          Name Product
-        </h2>
-        <span class="size py-1 px4 rounded-full uppercase text-xs">Small</span>
-        <div class="flex items-center justify-around mt-6">
-          <span class="font-bold text-lg">$ 10</span>
-          <button class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
-            <span>+</span>
-            <span class="ml-4">add</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <% end %>
-
-  </div>
-</div>
+<.live_component module={Items} id="items-component" />
