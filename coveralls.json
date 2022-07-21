@@ -1,0 +1,20 @@
+{
+  "skip_files": [
+    "lib/food_phx/application.ex",
+    "lib/food_phx/release.ex",
+    "lib/food_phx/telemetry.ex",
+    "lib/food_phx/views/error_helpers.ex",
+    "lib/food_phx_web.ex",
+    "lib/food_phx_web/telemetry.ex",
+    "lib/food_phx_web/channels/user_socket.ex",
+    "lib/food_phx_web/views/error_helpers.ex",
+    "test/support/channel_case.ex",
+    "test/support/data_case.ex",
+    "lib/food_phx/repo.ex"
+  ],
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "output_dir": "cover/",
+    "minimum_coverage": 75
+  }
+}
