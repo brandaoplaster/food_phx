@@ -8,7 +8,8 @@
 import Config
 
 config :food_phx,
-  ecto_repos: [FoodPhx.Repo]
+  ecto_repos: [FoodPhx.Repo],
+  generators: [binary_id: true]
 
 # Configures the endpoint
 config :food_phx, FoodPhxWeb.Endpoint,
