@@ -9,7 +9,7 @@
     "lib/food_phx_web/channels/user_socket.ex",
     "lib/food_phx_web/views/error_helpers.ex",
     "test/support/channel_case.ex",
-    "test/support/data_case.ex",
+    "test/support/*",
     "lib/food_phx/repo.ex"
   ],
   "coverage_options": {
