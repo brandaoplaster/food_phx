@@ -1,4 +1,5 @@
 defmodule FoodPhx.Factory do
+  use ExMachina.Ecto, repo: FoodPhx.Repo
   alias FoodPhx.Products.Product
 
   def product_factory do
