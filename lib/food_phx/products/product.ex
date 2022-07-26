@@ -18,7 +18,7 @@ defmodule FoodPhx.Products.Product do
     timestamps()
   end
 
-  def changeset(attrs) do
+  def changeset(attrs \\ %{}) do
     %__MODULE__{}
     |> cast(attrs, @fields ++ @required_fields)
     |> validate_required(@required_fields)
