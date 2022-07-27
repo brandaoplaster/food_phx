@@ -11,4 +11,7 @@ defmodule FoodPhx.Products do
     |> Product.changeset()
     |> Repo.insert()
   end
+
+  def changeset_product(product, params), do: Product.changeset(product, params)
+  def changeset_product, do: Product.changeset()
 end

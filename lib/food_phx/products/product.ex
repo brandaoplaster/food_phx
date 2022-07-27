@@ -18,8 +18,12 @@ defmodule FoodPhx.Products.Product do
     timestamps()
   end
 
-  def changeset(attrs) do
-    %__MODULE__{}
+  def changeset(attrs \\ %{}) do
+    changeset(%__MODULE__{}, attrs)
+  end
+
+  def changeset(product, attrs) do
+    product
     |> cast(attrs, @fields ++ @required_fields)
     |> validate_required(@required_fields)
     |> unique_constraint(:name)
