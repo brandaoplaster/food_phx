@@ -4,7 +4,7 @@ defmodule FoodPhxWeb.LiveHelpers do
 
   def modal(assigns) do
     ~H"""
-    <div class="phx-modal fade-in">
+    <div class="phx-modal fade-in" data-role="modal">
       <div class="phx-modal-content fade-in-scale">
         <%= render_slot(@inner_block) %>
       </div>

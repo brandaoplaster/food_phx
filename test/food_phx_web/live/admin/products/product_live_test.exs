@@ -20,6 +20,5 @@ defmodule FoodPhxWeb.Admin.ProductLiveTest do
     assert has_element?(view, "[data-role=product-price]", "#{product.price}")
     assert has_element?(view, "[data-role=product-size]", product.size)
     # assert has_element?(view, "[data-role=product-item][data-id=#{product.id}]")
-
   end
 end
