@@ -11,6 +11,8 @@ config :food_phx,
   ecto_repos: [FoodPhx.Repo],
   generators: [binary_id: true]
 
+config :money, default_currency: :BRL
+
 # Configures the endpoint
 config :food_phx, FoodPhxWeb.Endpoint,
   url: [host: "localhost"],
