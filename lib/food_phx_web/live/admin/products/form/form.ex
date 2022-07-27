@@ -22,4 +22,17 @@ defmodule FoodPhxWeb.Admin.Products.Form do
 
     {:noreply, assign(socket, :changeset, changeset)}
   end
+
+  def handle_event("save", %{"product" => params}, socket) do
+    case Products.create_product(params) do
+      {:ok, _product} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "Product has created")
+         |> push_redirect(to: "/admin/products")}
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+    end
+  end
 end
