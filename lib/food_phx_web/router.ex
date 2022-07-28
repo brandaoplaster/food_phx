@@ -19,7 +19,7 @@ defmodule FoodPhxWeb.Router do
 
     live "/", MainLive, :index
 
-    scope "admin", Admin, as: :admin do
+    scope "/admin", Admin, as: :admin do
       live "/products", ProductLive, :index
     end
   end
