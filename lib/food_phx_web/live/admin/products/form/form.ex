@@ -4,14 +4,14 @@ defmodule FoodPhxWeb.Admin.Products.Form do
   alias FoodPhx.Products
   alias FoodPhx.Products.Product
 
-  def update(assigns, socket) do
-    changeset = Products.changeset_product()
+  def update(%{product: product} = assigns, socket) do
+    changeset = Products.changeset_product(product)
 
     {:ok,
      socket
      |> assign(assigns)
      |> assign(changeset: changeset)
-     |> assign(product: %Product{})}
+     |> assign(product: product)}
   end
 
   def handle_event("validate", %{"product" => params}, socket) do
@@ -29,7 +29,7 @@ defmodule FoodPhxWeb.Admin.Products.Form do
         {:noreply,
          socket
          |> put_flash(:info, "Product has created")
-         |> push_redirect(to: "/admin/products")}
+         |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
