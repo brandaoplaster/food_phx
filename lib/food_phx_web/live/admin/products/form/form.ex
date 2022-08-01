@@ -46,7 +46,7 @@ defmodule FoodPhxWeb.Admin.Products.Form do
       {:ok, _product} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Product has created")
+         |> put_flash(:info, "Product updated")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, changeset} ->
