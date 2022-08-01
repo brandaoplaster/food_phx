@@ -36,7 +36,12 @@
                 <%= product.size %>
               </td>
               <td class="px-4 py-3 border">    
-                Edit | Show | Delete
+                <%= live_patch "Edit", 
+                  to: Routes.admin_product_path(@socket, :edit, product),
+                  "data-role": "add-new-product",
+                  class: "px-3 py-1 rounded-full text-white font-bold btn-primary" 
+                %> 
+                | Show | Delete
               </td>
             </tr>
           <% end %>
