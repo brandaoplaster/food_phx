@@ -21,6 +21,13 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     |> assign(:product, %Product{})
   end
 
+  defp apply_action(socket, :edit, %{"id" => id}) do
+    product = Products.get!(id)
+    socket
+    |> assign(:page_title, "Edit product")
+    |> assign(:product, product)
+  end
+
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "List product")

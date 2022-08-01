@@ -24,7 +24,25 @@ defmodule FoodPhxWeb.Admin.Products.Form do
   end
 
   def handle_event("save", %{"product" => params}, socket) do
+    action = socket.assigns.action
+    save(socket, action, params)
+  end
+
+  def save(socket, :new, params) do
     case Products.create_product(params) do
+      {:ok, _product} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "Product has created")
+         |> push_redirect(to: socket.assigns.return_to)}
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+    end
+  end
+
+  def save(socket, :edit, params) do
+    case Products.update_product(socket.assigns.product, params) do
       {:ok, _product} ->
         {:noreply,
          socket
