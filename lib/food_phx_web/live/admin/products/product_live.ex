@@ -10,7 +10,7 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     {:ok, socket |> assign(products: products)}
   end
 
-  def render_params(params, _url, socket) do
+  def handle_params(params, _url, socket) do
     live_action = socket.assigns.live_action
     {:noreply, apply_action(socket, live_action, params)}
   end
