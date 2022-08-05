@@ -8,11 +8,26 @@ defmodule FoodPhx.Products.ProductsTest do
     assert Products.list_products() == []
   end
 
+  test "get!/1" do
+    params = %{name: "pão de queijo", size: "big", price: 50, description: "queijo"}
+
+    {:ok, product} = Products.create_product(params)
+    assert Products.get!(product.id).name == product.name
+  end
+
   test "create_product" do
     params = %{name: "pão de queijo", size: "big", price: 50, description: "queijo"}
 
     assert {:ok, %Product{} = product} = Products.create_product(params)
     assert product.name == params.name
+  end
+
+  test "update product" do
+    params = %{name: "pão de queijo", size: "big", price: 50, description: "queijo"}
+
+    assert {:ok, product} = Products.create_product(params)
+    assert {:ok, %Product{} = product} = Products.update_product(product, %{name: "uva"})
+    assert product.name == "uva"
   end
 
   test "give a product with the same name should throw an error message" do
