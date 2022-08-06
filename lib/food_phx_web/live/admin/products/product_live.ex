@@ -15,6 +15,12 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     {:noreply, apply_action(socket, live_action, params)}
   end
 
+  def handle_event("delete", %{"id" => id}, socket) do
+    {:ok, _} = Products.delete(id)
+
+    {:noreply, assign(socket, :products, Products.list_products)}
+  end
+
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "Create new product")
