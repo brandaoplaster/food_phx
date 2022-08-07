@@ -42,11 +42,13 @@
                   "data-id": product.id,
                   class: "px-3 py-1 rounded-full text-white font-bold btn-primary"
                 %> 
-                <%= link "delete", to: "#", 
+                <%= link "Delete", to: "#", 
                   phx_click: "delete",
                   phx_value_id: product.id,
                   data: [confirm: "He is sure?"],
-                  class: "px-3 py-1 rounded-full text-white font-bold bg-red-600"
+                  class: "px-3 py-1 rounded-full text-white font-bold bg-red-600",
+                  "data-role": "delete",
+                  "data-id": product.id
                 %>
               </td>
             </tr>
