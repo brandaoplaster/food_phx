@@ -57,8 +57,8 @@ defmodule FoodPhxWeb.Admin.Products.FormTest do
     assert_patch(view, Routes.admin_product_path(conn, :edit, product))
 
     assert view
-      |> form("##{product.id}", product: %{name: nil})
-      |> render_submit() =~ "can&#39;t be blank"
+           |> form("##{product.id}", product: %{name: nil})
+           |> render_submit() =~ "can&#39;t be blank"
   end
 
   test "given a product that has already exist when click to edit the open modal", %{conn: conn} do
