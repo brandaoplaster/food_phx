@@ -30,6 +30,14 @@ defmodule FoodPhx.Products.ProductsTest do
     assert product.name == "uva"
   end
 
+  test "delete/1" do
+    params = %{name: "pão de queijo", size: "big", price: 50, description: "queijo"}
+
+    {:ok, product} = Products.create_product(params)
+    assert {:ok, %Product{}} = Products.delete(product.id)
+    assert_raise Ecto.NoResultsError, fn -> Products.get!(product.id) end
+  end
+
   test "give a product with the same name should throw an error message" do
     params = %{name: "pão de queijo", size: "big", price: 50, description: "queijo"}
 
