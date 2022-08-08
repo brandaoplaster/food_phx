@@ -22,5 +22,11 @@ defmodule FoodPhx.Products do
     |> Repo.update()
   end
 
+  def delete(id) do
+    id
+    |> get!()
+    |> Repo.delete()
+  end
+
   def changeset_product(product, params \\ %{}), do: Product.changeset(product, params)
 end
