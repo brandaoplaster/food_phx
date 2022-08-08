@@ -23,9 +23,8 @@ defmodule FoodPhxWeb.Admin.Products.FormTest do
 
     assert view |> has_element?("#modal")
 
-    view
-    |> element("#close", "x")
-    |> render_click()
+    assert view
+    |> has_element?("#close", "x")
   end
 
   test "given a product when submit the form return a message success", %{conn: conn} do
