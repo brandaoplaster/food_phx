@@ -35,7 +35,13 @@
               <td class="px-4 py-3 border" data-role="product-size" data-id={product.id}>
                 <%= product.size %>
               </td>
-              <td class="px-4 py-3 border">    
+              <td class="px-4 py-3 border">
+                <%= live_redirect "Show", 
+                  to: Routes.admin_product_show_path(@socket, :show, product),
+                  class: "px-3 py-1 rounded-full text-white font-bold bg-blue-600", 
+                  "data-role": "show",
+                  "data-id": product.id
+                %>
                 <%= live_patch "Edit", 
                   to: Routes.admin_product_path(@socket, :edit, product),
                   "data-role": "edit-product",
