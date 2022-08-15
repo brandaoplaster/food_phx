@@ -6,7 +6,7 @@ defmodule FoodPhx.Accounts do
   import Ecto.Query, warn: false
   alias FoodPhx.Repo
 
-  alias FoodPhx.Accounts.{User, UserToken, UserNotifier}
+  alias FoodPhx.Accounts.{User, UserNotifier, UserToken}
 
   ## Database getters
 
