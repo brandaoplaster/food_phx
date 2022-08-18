@@ -1,27 +1,39 @@
 <nav class="container mx-auto flex items-center justify-between py-4">
   <div class="logo">
-    <a href="#" class="">
+    <%= link to: Routes.main_path(@conn, :index) do %>
       <img src={Routes.static_path(@conn, "/images/logo.png" )} alt="" class="h-32 w-32" />
-    </a>
+    <% end %>
   </div>
 
   <div id="menu">
     <ul class="flex items-center">
-      <li class="ml-6">
-        <a href="#">Menu 1</a>
-      </li>
-      <li class="ml-6">
-        <a href="#">Menu 2</a>
-      </li>
-      <li class="ml-6">
-        <a href="#">Menu 3</a>
-      </li>
-      <li class="ml-6">
-        <a href="#">Menu 4</a>
-      </li>
-      <li class="ml-6">
-        <a href="#">Menu 5</a>
-      </li>
+      <%= if @current_user do %>
+        <li class="ml-6">
+          <a href="#">My Orders</a>
+        </li>
+        <li class="ml-6">
+          <%= link "Admin Products", to: Routes.admin_product_path(@conn, :index) %>
+        </li>
+        <li class="ml-6">
+          <a href="#">Admin Orders</a>
+        </li>
+        <li class="ml-6">
+          <%= @current_user.email %>
+        </li>
+        <li class="ml-6">
+          <%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %>
+        </li>
+        <li class="ml-6">
+          <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %>
+        </li>
+      <% else %>
+        <li class="ml-6">
+          <%= link "Register", to: Routes.user_registration_path(@conn, :new) %>
+        </li>
+        <li class="ml-6">
+          <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>
