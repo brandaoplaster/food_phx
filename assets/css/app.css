@@ -67,6 +67,20 @@ section.hero{
   transition: var(--smooth);
 }
 
+section.login {
+  background: var(--pure);
+  min-height: calc(100vh - 86px);
+}
+
+section.login a {
+  color: var(--primary);
+  transition: var(--smooth);
+}
+
+section.login a:hover {
+  columns: var(--primary-hover);
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;

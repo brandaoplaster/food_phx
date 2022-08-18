@@ -3,14 +3,18 @@ defmodule FoodPhxWeb.Admin.Products.ShowTest do
   import Phoenix.LiveViewTest
   import FoodPhx.Factory
 
-  test "load page", %{conn: conn} do
-    product = insert(:product)
+  describe "test show" do
+    setup :register_and_log_in_user
 
-    {:ok, view, _html} = live(conn, Routes.admin_product_show_path(conn, :show, product.id))
+    test "load page", %{conn: conn} do
+      product = insert(:product)
 
-    assert has_element?(view, "[data-role=name]", product.name)
-    assert has_element?(view, "[data-role=size]", product.size)
-    assert has_element?(view, "[data-role=description]", product.description)
-    assert has_element?(view, "[data-role=price]", Money.to_string(product.price))
+      {:ok, view, _html} = live(conn, Routes.admin_product_show_path(conn, :show, product.id))
+
+      assert has_element?(view, "[data-role=name]", product.name)
+      assert has_element?(view, "[data-role=size]", product.size)
+      assert has_element?(view, "[data-role=description]", product.description)
+      assert has_element?(view, "[data-role=price]", Money.to_string(product.price))
+    end
   end
 end
