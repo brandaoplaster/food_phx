@@ -1,11 +1,13 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     FoodPhx.Repo.insert!(%FoodPhx.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias FoodPhx.Accounts
+
+Accounts.register_user(%{
+  email: "admin@gmail.com",
+  password: "qazwsxedcrfv",
+  role: "ADMIN"
+})
+
+Accounts.register_user(%{
+  email: "user@gmail.com",
+  password: "qazwsxedcrfv",
+  role: "USER"
+})
