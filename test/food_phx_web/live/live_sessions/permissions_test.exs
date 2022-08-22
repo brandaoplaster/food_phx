@@ -9,7 +9,7 @@ defmodule LiveSessions.PermissionsTest do
     test "when admin is corrent", %{conn: conn} do
       product = insert(:product)
       {:ok, view, _} = live(conn, Routes.admin_product_path(conn, :index))
-      assert has_element?(view, "[data-role=product-action][dta-id=#{product.id}]")
+      assert has_element?(view, "[data-role=product-action][data-id=#{product.id}]")
     end
   end
 
