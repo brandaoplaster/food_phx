@@ -5,7 +5,7 @@ defmodule FoodPhxWeb.Admin.ProductLiveTest do
   import FoodPhx.Factory
 
   describe "test page list products" do
-    setup :register_and_log_in_user
+    setup :register_and_log_in_admin
 
     test "load page product", %{conn: conn} do
       product = insert(:product)
