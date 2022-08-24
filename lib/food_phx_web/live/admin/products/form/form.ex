@@ -3,7 +3,7 @@ defmodule FoodPhxWeb.Admin.Products.Form do
 
   alias FoodPhx.Products
 
-  @upload_config [accept: ~w/.png .jpeg .jpg/, max_entries: 1, max_file_size: 10_000_000]
+  @upload_config [accept: ~w/.png .jpeg .jpg/, max_entries: 2, max_file_size: 10_000_000]
 
   def update(%{product: product} = assigns, socket) do
     changeset = Products.changeset_product(product)

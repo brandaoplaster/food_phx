@@ -27,12 +27,18 @@
     <div class="mb-4">
       <div class="upload-info">
         Add up to <%= @uploads.photo.max_entries %> photos
-        (max <%= trunc(@uploads.photo.max_file_sie / 1_000_000) %> mb each)
+        (max <%= trunc(@uploads.photo.max_file_size / 1_000_000) %> mb each)
       </div>
 
       <%= live_file_input @uploads.photo %>
 
-      <%= for entry <- @uploads.entries do %>
+      <%= for {_rerf, errors} <- @uploads.photo.errors do %>
+        <div class="errors">
+          <%= humanize(errors) %>
+        </div>
+      <% end %>
+
+      <%= for entry <- @uploads.photo.entries do %>
         <div class="photo-property">
           <div class="img-preview">
             <%= live_img_preview entry, with: 75 %>
@@ -55,9 +61,14 @@
             </button>
           </div>
 
+          <%= for error_msg <- upload_errors(@uploads.photo.errors, entry) do %>
+            <div class="errors">
+              <%= humanize(error_msg) %>
+          </div>
+        <% end %>
+
         </div>
       <% end %>
-      end
     </div>
 
     <div class="flex items-center">
