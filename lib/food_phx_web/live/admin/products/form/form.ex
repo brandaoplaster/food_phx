@@ -2,7 +2,8 @@ defmodule FoodPhxWeb.Admin.Products.Form do
   use FoodPhxWeb, :live_component
 
   alias FoodPhx.Products
-  alias FoodPhx.Products.Product
+
+  @upload_config [accept: ~w/.png .jpeg .jpg/, max_entries: 1, max_file_size: 10_000_000]
 
   def update(%{product: product} = assigns, socket) do
     changeset = Products.changeset_product(product)
@@ -11,6 +12,7 @@ defmodule FoodPhxWeb.Admin.Products.Form do
      socket
      |> assign(assigns)
      |> assign(changeset: changeset)
+     |> allow_upload(:photo, @upload_config)
      |> assign(product: product)}
   end
 
@@ -26,6 +28,10 @@ defmodule FoodPhxWeb.Admin.Products.Form do
   def handle_event("save", %{"product" => params}, socket) do
     action = socket.assigns.action
     save(socket, action, params)
+  end
+
+  def handle_event("cancel", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :photo, ref)}
   end
 
   def save(socket, :new, params) do
