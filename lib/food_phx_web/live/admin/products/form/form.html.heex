@@ -73,7 +73,7 @@
               &times;
           </button>
 
-          <%= for error_msg <- upload_errors(@uploads.photo.errors, entry) do %>
+          <%= for error_msg <- upload_errors(@uploads.photo, entry) do %>
             <div class="text-red-500">
               <%= humanize(error_msg) %>
             </div>
