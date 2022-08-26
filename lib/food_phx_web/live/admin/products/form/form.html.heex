@@ -69,6 +69,8 @@
               phx-click="cancel"
               phx-target={@myself}
               phx-value-ref={entry.ref}
+              data-role="cancel"
+              data-id={entry.ref}
               >
               &times;
           </button>
@@ -82,6 +84,7 @@
 
         <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
           <div class="bg-yellow-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+            data-role="image-loaded" data-id={entry.ref}
             style={"width:" <> Integer.to_string(entry.progress) <> "%" }>
             <%= entry.progress %>
           </div>
