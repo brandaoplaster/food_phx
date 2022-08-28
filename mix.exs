@@ -63,7 +63,9 @@ defmodule FoodPhx.MixProject do
       {:sobelow, "~> 0.11.1", only: :dev},
       {:ex_machina, "~> 2.7.0"},
       {:faker, "~> 0.17", only: [:test, :dev]},
-      {:money, "~> 1.9"}
+      {:money, "~> 1.9"},
+      {:waffle, "~> 1.1.0"},
+      {:waffle_ecto, "~> 0.0.9"}
     ]
   end
 
