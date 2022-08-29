@@ -27,6 +27,7 @@ defmodule FoodPhxWeb.Admin.Products.Form do
 
   def handle_event("save", %{"product" => params}, socket) do
     action = socket.assigns.action
+    params = build_photo_to_upload(socket, params)
     save(socket, action, params)
   end
 
@@ -58,5 +59,29 @@ defmodule FoodPhxWeb.Admin.Products.Form do
       {:error, changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
+  end
+
+  defp build_photo_to_upload(socket, params) do
+    [file_upload | _] =
+      consume_uploaded_entries(socket, :photo, fn %{path: path}, entry ->
+        file_name = get_file_name(entry)
+        destination = Path.join("/tmp", file_name)
+        File.cp!(path, destination)
+
+        file_upload = %Plug.Upload{
+          content_type: entry.client_type,
+          filename: entry.client_name,
+          path: destination
+        }
+
+        {:ok, file_upload}
+      end)
+
+    Map.put(params, "product_url", file_upload)
+  end
+
+  defp get_file_name(entry) do
+    [ext | _] = MIME.extensions(entry.client_type)
+    "#{entry.uuid}.#{ext}"
   end
 end

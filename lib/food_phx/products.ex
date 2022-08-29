@@ -1,5 +1,6 @@
 defmodule FoodPhx.Products do
   alias FoodPhx.Products.Product
+  alias FoodPhx.Products.ProductImage
   alias FoodPhx.Repo
 
   def list_products do
@@ -29,4 +30,10 @@ defmodule FoodPhx.Products do
   end
 
   def changeset_product(product, params \\ %{}), do: Product.changeset(product, params)
+
+  def get_image(product) do
+    url = ProductImage.url({product.product_url, product})
+    [_, url] = String.split(url, "/priv/static")
+    url
+  end
 end
