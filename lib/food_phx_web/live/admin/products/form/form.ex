@@ -62,21 +62,26 @@ defmodule FoodPhxWeb.Admin.Products.Form do
   end
 
   defp build_photo_to_upload(socket, params) do
-    [file_upload | _] =
-      consume_uploaded_entries(socket, :photo, fn %{path: path}, entry ->
-        file_name = get_file_name(entry)
-        destination = Path.join("/tmp", file_name)
-        File.cp!(path, destination)
+    socket
+    |> consume_uploaded_entries(:photo, fn %{path: path}, entry ->
+      file_name = get_file_name(entry)
+      destination = Path.join("/tmp", file_name)
+      File.cp!(path, destination)
 
-        file_upload = %Plug.Upload{
-          content_type: entry.client_type,
-          filename: entry.client_name,
-          path: destination
-        }
+      file_upload = %Plug.Upload{
+        content_type: entry.client_type,
+        filename: entry.client_name,
+        path: destination
+      }
 
-        {:ok, file_upload}
-      end)
+      {:ok, file_upload}
+    end)
+    |> add_file_upload(params)
+  end
 
+  defp add_file_upload([], params), do: params
+
+  defp add_file_upload([file_upload | _], params) do
     Map.put(params, "product_url", file_upload)
   end
 
