@@ -46,6 +46,34 @@ defmodule FoodPhxWeb.Admin.Products.FormTest do
       assert html =~ "Product has created"
     end
 
+    test "create product with image", %{conn: conn} do
+      {:ok, view, _html} = live(conn, Routes.admin_product_path(conn, :index))
+
+      open_modal(view)
+
+      upload =
+        file_input(view, "#new", :photo, [
+          %{
+            last_modified: 1_594_171_879_000,
+            name: "myfile.jpeg",
+            content: "   ",
+            type: "image/jpeg"
+          }
+        ])
+
+      assert render_upload(upload, "myfile.jpeg", 100) =~ "100%"
+
+      payload = %{name: "pão", description: "pequeno pão", price: 12, size: "small"}
+
+      {:ok, _, html} =
+        view
+        |> form("#new", product: payload)
+        |> render_submit()
+        |> follow_redirect(conn, Routes.admin_product_path(conn, :index))
+
+      assert html =~ "pão"
+    end
+
     test "given a product that has already exist when try to update without information return an error",
          %{conn: conn} do
       product = insert(:product)

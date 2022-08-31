@@ -20,6 +20,46 @@ defmodule FoodPhx.Products.ProductsTest do
 
     assert {:ok, %Product{} = product} = Products.create_product(params)
     assert product.name == params.name
+    assert "" == Products.get_image(product)
+  end
+
+  test "create_product with image and get the image url" do
+    file_upload = %Plug.Upload{
+      content_type: "image/png",
+      filename: "photo.png",
+      path: "test/support/fixtures/photo.png"
+    }
+
+    params = %{
+      name: "pão de queijo",
+      size: "big",
+      price: 50,
+      description: "queijo",
+      product_url: file_upload
+    }
+
+    assert {:ok, %Product{} = product} = Products.create_product(params)
+    url = Products.get_image(product)
+    assert String.contains?(url, file_upload.filename)
+  end
+
+  test "create_product with invalid image type" do
+    file_upload = %Plug.Upload{
+      content_type: "image/svg",
+      filename: "photo.svg",
+      path: "test/support/fixtures/photo.svg"
+    }
+
+    params = %{
+      name: "pão de queijo",
+      size: "big",
+      price: 50,
+      description: "queijo",
+      product_url: file_upload
+    }
+
+    assert {:error, changeset} = Products.create_product(params)
+    assert "File type is invalid" in errors_on(changeset).product_url
   end
 
   test "update product" do
