@@ -4,7 +4,7 @@
   </h1>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
     <%= for product <- @products do %>
-      <.live_component module={Item} id={"item" <> product.id} />
+      <.live_component module={Item} id={"item" <> product.id} product={product} />
     <% end %>
   </div>
 </section>
