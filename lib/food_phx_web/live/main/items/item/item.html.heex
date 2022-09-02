@@ -1,12 +1,16 @@
 <div class="lg:w-64 shadow-lg rounded-lg p-4" id={@id}>
-  <img src={Routes.static_path(@socket, "/images/item.svg" )} alt="" class="h-40 mb-4 mx-auto" data-role="img">
+  <img src={Products.get_image(@product)} alt="" class="h-40 mb-4 mx-auto" data-role="img">
   <div class="text-center">
     <h2 class="mb-4 text-lg">
-      Name Product
+      <%= @product.name %>
     </h2>
-    <span class="size py-1 px4 rounded-full uppercase text-xs">Small</span>
+    <span class="size py-1 px4 rounded-full uppercase text-xs">
+      <%= @product.size %>
+    </span>
     <div class="flex items-center justify-around mt-6">
-      <span class="font-bold text-lg">$ 10</span>
+      <span class="font-bold text-lg">
+        <%= @product.price %>
+      </span>
       <button class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
         <span>+</span>
         <span class="ml-4">add</span>
