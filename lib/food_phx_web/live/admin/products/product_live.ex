@@ -3,6 +3,7 @@ defmodule FoodPhxWeb.Admin.ProductLive do
 
   alias FoodPhx.Products
   alias FoodPhx.Products.Product
+  alias FoodPhxWeb.Admin.ProductRow
   alias FoodPhxWeb.Admin.Products.Form
 
   def mount(_assign, _session, socket) do
