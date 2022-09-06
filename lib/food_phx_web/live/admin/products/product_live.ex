@@ -30,6 +30,11 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     {:noreply, assign(socket, :products, Products.list_products())}
   end
 
+  def handle_event("filter-by-name", %{"name" => name}, socket) do
+    socket = apply_filters(socket, name)
+    {:noreply, socket}
+  end
+
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "Create new product")
@@ -48,5 +53,11 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     socket
     |> assign(:page_title, "List product")
     |> assign(:product, nil)
+  end
+
+  defp apply_filters(socket, name) do
+    products = Products.list_products(name)
+
+    assign(socket, products: products, name: name)
   end
 end

@@ -1,7 +1,17 @@
 defmodule FoodPhx.Products do
+  import Ecto.Query
+
   alias FoodPhx.Products.Product
   alias FoodPhx.Products.ProductImage
   alias FoodPhx.Repo
+
+  def list_products(name) do
+    name = "%#{name}%"
+
+    Product
+    |> where([p], ilike(p.name, ^name))
+    |> Repo.all()
+  end
 
   def list_products do
     Repo.all(Product)
