@@ -3,15 +3,24 @@ defmodule FoodPhxWeb.Admin.ProductLive do
 
   alias FoodPhx.Products
   alias FoodPhx.Products.Product
+  alias FoodPhxWeb.Admin.ProductRow
+  alias FoodPhxWeb.Admin.Products.FilterByName
   alias FoodPhxWeb.Admin.Products.Form
 
   def mount(_assign, _session, socket) do
-    products = Products.list_products()
-    {:ok, socket |> assign(products: products)}
+    {:ok, socket}
   end
 
   def handle_params(params, _url, socket) do
     live_action = socket.assigns.live_action
+    products = Products.list_products()
+
+    socket =
+      socket
+      |> apply_action(live_action, params)
+      |> assign(products: products)
+      |> assign(name: "")
+
     {:noreply, apply_action(socket, live_action, params)}
   end
 
@@ -19,6 +28,11 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     {:ok, _} = Products.delete(id)
 
     {:noreply, assign(socket, :products, Products.list_products())}
+  end
+
+  def handle_event("filter-by-name", %{"name" => name}, socket) do
+    socket = apply_filters(socket, name)
+    {:noreply, socket}
   end
 
   defp apply_action(socket, :new, _params) do
@@ -39,5 +53,11 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     socket
     |> assign(:page_title, "List product")
     |> assign(:product, nil)
+  end
+
+  defp apply_filters(socket, name) do
+    products = Products.list_products(name)
+
+    assign(socket, products: products, name: name)
   end
 end
