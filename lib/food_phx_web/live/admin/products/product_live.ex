@@ -14,12 +14,12 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   def handle_params(params, _url, socket) do
     live_action = socket.assigns.live_action
     products = Products.list_products()
+    assigns = [products: products, name: "", loading: false]
 
     socket =
       socket
       |> apply_action(live_action, params)
-      |> assign(products: products)
-      |> assign(name: "")
+      |> assign(assigns)
 
     {:noreply, apply_action(socket, live_action, params)}
   end
@@ -33,6 +33,12 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   def handle_event("filter-by-name", %{"name" => name}, socket) do
     socket = apply_filters(socket, name)
     {:noreply, socket}
+  end
+
+  def handle_info({:list_products, name}, socket) do
+    products = Products.list_products(name)
+    assigns = [products: products, loading: false]
+    {:noreply, assign(socket, assigns)}
   end
 
   defp apply_action(socket, :new, _params) do
@@ -56,8 +62,8 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   end
 
   defp apply_filters(socket, name) do
-    products = Products.list_products(name)
-
-    assign(socket, products: products, name: name)
+    assigns = [products: [], name: name, loading: true]
+    send(self(), {:list_products, name})
+    assign(socket, assigns)
   end
 end
