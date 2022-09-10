@@ -36,9 +36,7 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   end
 
   def handle_info({:list_products, name}, socket) do
-    products = Products.list_products(name)
-    assigns = [products: products, loading: false]
-    {:noreply, assign(socket, assigns)}
+    {:noreply, perform_filter(socket, name)}
   end
 
   defp apply_action(socket, :new, _params) do
@@ -64,6 +62,26 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   defp apply_filters(socket, name) do
     assigns = [products: [], name: name, loading: true]
     send(self(), {:list_products, name})
+    assign(socket, assigns)
+  end
+
+  defp perform_filter(socket, name) do
+    name
+    |> Products.list_products()
+    |> return_filter_response(socket, name)
+  end
+
+  defp return_filter_response([], socket, name) do
+    assigns = [products: [], loading: false]
+
+    socket
+    |> put_flash(:info, "There is no product with \"#{name}\"")
+    |> assign(assigns)
+  end
+
+  defp return_filter_response(products, socket, _name) do
+    assigns = [products: products, loading: false]
+
     assign(socket, assigns)
   end
 end
