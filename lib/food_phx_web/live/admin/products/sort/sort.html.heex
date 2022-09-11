@@ -1,3 +1,6 @@
 <a href="#">
-  <%= humanize(@sort_by) %>
+  <span class="pr-2">
+    <%= humanize(@sort_by) %>
+  </span>
+  <img src={Routes.static_path(@socket, "images/sort_asc.svg")} alt="">
 </a>
