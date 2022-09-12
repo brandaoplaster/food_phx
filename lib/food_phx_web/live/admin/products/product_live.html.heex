@@ -29,7 +29,12 @@
               Image
             </th>
             <th class="px-4 py-3" data-id="head-name">
-              <.live_component module={Sort} id="sort-by-name" sort_by={:name} />
+              <.live_component
+                module={Sort}
+                id="sort-by-name"
+                sort_by={:name}
+                options={%{sort_by: :name, sort_order: :desc}}
+              />
             </th>
             <th class="px-4 py-3" data-id="head-price">
               Price
