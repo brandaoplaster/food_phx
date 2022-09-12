@@ -37,10 +37,20 @@
               />
             </th>
             <th class="px-4 py-3" data-id="head-price">
-              Price
+              <.live_component
+                module={Sort}
+                id="sort-by-price"
+                sort_by={:price}
+                options={%{sort_by: :price, sort_order: :desc}}
+              />
             </th>
             <th class="px-4 py-3" data-id="head-size">
-              Size
+              <.live_component
+                module={Sort}
+                id="sort-by-size"
+                sort_by={:size}
+                options={%{sort_by: :size, sort_order: :desc}}
+              />
             </th>
             <th class="px-4 py-3" data-id="head-actions">
               Actions
