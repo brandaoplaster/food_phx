@@ -6,20 +6,29 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   alias FoodPhxWeb.Admin.ProductRow
   alias FoodPhxWeb.Admin.Products.FilterByName
   alias FoodPhxWeb.Admin.Products.Form
+  alias FoodPhxWeb.Admin.Products.Sort
 
   def mount(_assign, _session, socket) do
     {:ok, socket}
   end
 
   def handle_params(params, _url, socket) do
+    name = params["name"] || ""
+    sort_by = (params["sort_by"] || "updated_at") |> String.to_atom()
+    sort_order = (params["sort_order"] || "desc") |> String.to_atom()
+    sort = %{sort_by: sort_by, sort_order: sort_order}
+
     live_action = socket.assigns.live_action
-    products = Products.list_products()
+    products = Products.list_products(name: name, sort: sort)
     assigns = [products: products, name: "", loading: false]
+
+    options = sort
 
     socket =
       socket
       |> apply_action(live_action, params)
       |> assign(assigns)
+      |> assign(options: options)
 
     {:noreply, apply_action(socket, live_action, params)}
   end

@@ -1,0 +1,12 @@
+<div id={@id}>
+  <%= live_patch to: Routes.admin_product_path(@socket, :index, 
+      sort_by: @sort_by,
+      sort_order: @sort_order,
+      name: @name
+    ), class: "flex", "data-role": "sort", "data-id": @sort_by do %>
+    <span class="pr-2">
+      <%= humanize(@sort_by) %>
+    </span>
+    <img src={Routes.static_path(@socket, "/images/#{@icon}")} alt="" class="h-5 w-5">
+  <% end %>
+</div>
