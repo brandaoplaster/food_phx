@@ -33,7 +33,7 @@
                 module={Sort}
                 id="sort-by-name"
                 sort_by={:name}
-                options={%{sort_by: :name, sort_order: :desc}}
+                options={@options}
                 name={@name}
               />
             </th>
@@ -42,7 +42,7 @@
                 module={Sort}
                 id="sort-by-price"
                 sort_by={:price}
-                options={%{sort_by: :price, sort_order: :desc}}
+                options={@options}
               />
             </th>
             <th class="px-4 py-3" data-id="head-size">
