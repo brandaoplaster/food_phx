@@ -43,6 +43,7 @@
                 id="sort-by-price"
                 sort_by={:price}
                 options={@options}
+                name={@name}
               />
             </th>
             <th class="px-4 py-3" data-id="head-size">
@@ -50,7 +51,8 @@
                 module={Sort}
                 id="sort-by-size"
                 sort_by={:size}
-                options={%{sort_by: :size, sort_order: :desc}}
+                options={@options}
+                name={@name}
               />
             </th>
             <th class="px-4 py-3" data-id="head-actions">
