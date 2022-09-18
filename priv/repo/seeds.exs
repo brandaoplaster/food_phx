@@ -15,6 +15,7 @@ Accounts.register_user(%{
 
 Enum.each(1..200, fn _ ->
   image = :rand.uniform(4)
+
   %{
     name: Faker.Food.dish(),
     description: Faker.Food.description(),
