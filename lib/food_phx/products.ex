@@ -20,6 +20,14 @@ defmodule FoodPhx.Products do
     |> Repo.all()
   end
 
+  def list_suggest_names(name) do
+    name = "%#{name}%"
+    Product
+    |> where([p], ilike(p.name, ^name))
+    |> select([p], p.name)
+    |> Repo.all()
+  end
+
   def get!(id) do
     Repo.get!(Product, id)
   end
