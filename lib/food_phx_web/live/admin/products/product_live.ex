@@ -5,6 +5,7 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   alias FoodPhx.Products.Product
   alias FoodPhxWeb.Admin.ProductRow
   alias FoodPhxWeb.Admin.Products.FilterByName
+  alias FoodPhxWeb.Admin.Products.Paginate
   alias FoodPhxWeb.Admin.Products.Form
   alias FoodPhxWeb.Admin.Products.Sort
 
