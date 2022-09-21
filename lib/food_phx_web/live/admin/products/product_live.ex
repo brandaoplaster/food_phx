@@ -5,8 +5,8 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   alias FoodPhx.Products.Product
   alias FoodPhxWeb.Admin.ProductRow
   alias FoodPhxWeb.Admin.Products.FilterByName
-  alias FoodPhxWeb.Admin.Products.Paginate
   alias FoodPhxWeb.Admin.Products.Form
+  alias FoodPhxWeb.Admin.Products.Paginate
   alias FoodPhxWeb.Admin.Products.Sort
 
   def mount(_assign, _session, socket) do
@@ -17,13 +17,17 @@ defmodule FoodPhxWeb.Admin.ProductLive do
     name = params["name"] || ""
     sort_by = (params["sort_by"] || "updated_at") |> String.to_atom()
     sort_order = (params["sort_order"] || "desc") |> String.to_atom()
+    page = String.to_integer(params["page"] || "1")
+    per_page = String.to_integer(params["per_page"] || "4")
     sort = %{sort_by: sort_by, sort_order: sort_order}
 
+    paginate = %{page: page, per_page: per_page}
+
     live_action = socket.assigns.live_action
-    products = Products.list_products(name: name, sort: sort)
+    products = Products.list_products(paginate: paginate, name: name, sort: sort)
     assigns = [products: products, name: "", loading: false, names: []]
 
-    options = sort
+    options = Map.merge(paginate, sort)
 
     socket =
       socket
