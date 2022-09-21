@@ -1,21 +1,43 @@
 <div class="flex flex-col items-center my-12" id={@id}>
   <div class="flex">
-    <div class="h-8 w8 mr-1 flex justify-center items center cursor-pointer">
-      <a href="#" data-role="paginate" data-id="prev">prev</a>
-    </div>
+    <%= if @options.page > 1 do %>
+      <div class="h-8 w-8 mr-1 flex justify-center items-center  cursor-pointer">
+        <.page_link 
+          text={"<"} 
+          page={@options.page - 1}
+          options={@options}
+          name={@name}
+          socket={@socket}
+          data_id="prev"
+        />
+      </div>
+    <% end %>
 
     <div class="flex h-8 font-medium">
-      <div class="w-8 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in border-t-2 border-yellow-600">
-        <a href="#" data-role="paginate" data-id="1">1</a>
-      </div>
-
-      <div class="w-8 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in border-t-2 border-transparent">
-        <a href="#" data-role="paginate" data-id="1">1</a>
-      </div>
+      <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0 do %>
+        <div class={"w-8 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150
+                ease-in border-t-2 #{i == @options.page && "border-yellow-600" || "border-transparent" }"}>
+          <.page_link
+            text={i}
+            page={i}
+            options={@options}
+            name={@name}
+            socket={@socket}
+            data_id={i}
+          />
+        </div>
+      <% end %>
     </div>
 
     <div class="h-8 w8 mr-1 flex justify-center items center cursor-pointer">
-      <a href="#" data-role="paginate" data-id="next">next</a>
+      <.page_link 
+        text={">"}
+        page={@options.page + 1}
+        options={@options}
+        name={@name}
+        socket={@socket}
+        data_id="next"
+      />
     </div>
   </div>
 </div>
