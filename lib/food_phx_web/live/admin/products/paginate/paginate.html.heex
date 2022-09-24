@@ -1,14 +1,5 @@
 <div class="flex flex-col items-center my-12" id={@id}>
   <div class="flex">
-    <form phx-change="update-select-perpage" phx-target={@self} id="per-page">
-      <select name="per-page-select" id="select-per-page">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-      </select>
-    </form>
-  </div>
-  <div class="flex">
     <%= if @options.page > 1 do %>
       <div class="h-8 w-8 mr-1 flex justify-center items-center  cursor-pointer">
         <.page_link 
