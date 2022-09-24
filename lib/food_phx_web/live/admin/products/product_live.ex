@@ -7,6 +7,7 @@ defmodule FoodPhxWeb.Admin.ProductLive do
   alias FoodPhxWeb.Admin.Products.FilterByName
   alias FoodPhxWeb.Admin.Products.Form
   alias FoodPhxWeb.Admin.Products.Paginate
+  alias FoodPhxWeb.Admin.Products.SelectPerPage
   alias FoodPhxWeb.Admin.Products.Sort
 
   def mount(_assign, _session, socket) do
