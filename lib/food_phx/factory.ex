@@ -5,8 +5,8 @@ defmodule FoodPhx.Factory do
   def product_factory do
     %Product{
       description: Faker.Food.description(),
-      name: Faker.Food.dish(),
-      price: 100,
+      name: Faker.Food.dish() <> (:rand.uniform(10_000) |> Integer.to_string()),
+      price: :rand.uniform(10_000),
       size: "big"
     }
   end
