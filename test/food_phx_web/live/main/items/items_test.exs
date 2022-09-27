@@ -26,7 +26,7 @@ defmodule FoodPhxWeb.Main.ItemsTest do
 
     view
     |> element("#products-loading")
-    |> render_hook("load-more", %{})
+    |> render_hook("products-loading", %{})
 
     Enum.each(products_page_2, fn product ->
       assert has_element?(view, "#item-#{product.id}")
