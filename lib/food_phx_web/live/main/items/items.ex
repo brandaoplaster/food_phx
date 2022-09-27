@@ -14,7 +14,7 @@ defmodule FoodPhxWeb.Main.Items do
     {:ok, socket}
   end
 
-  def handle_event("load-more", _, socket) do
+  def handle_event("products-loading", _, socket) do
     socket =
       socket
       |> update(:page, &(&1 + 1))
