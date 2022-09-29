@@ -39,5 +39,28 @@ defmodule FoodPhx.Carts.Core.HandleCartsTest do
       assert [%{item: product, total_amount: 2}] == cart.items
       assert Money.add(product.price, product.price) == cart.total_price
     end
+
+    test "should remove an item" do
+      product = insert(:product)
+      product_2 = insert(:product)
+
+      cart =
+        @start_cart
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.add_new_cart(product_2)
+
+      assert 3 == cart.total_amount
+      assert [%{item: product, total_amount: 2}, %{item: product_2, total_amount: 1}] == cart.items
+
+      assert Money.add(product.price, product.price)
+             |> Money.add(product_2.price) == cart.total_price
+
+      cart = HandleCarts.remove(cart, product.id)
+
+      assert 1 == cart.total_amount
+      assert product_2.price == cart.total_price
+      assert [%{item: product_2, total_amount: 1}] == cart.items
+    end
   end
 end

@@ -14,6 +14,31 @@ defmodule FoodPhx.Carts.Core.HandleCarts do
     }
   end
 
+  def remove(cart, item_id) do
+    {items, item_removed} = Enum.reduce(cart.items, {[], nil}, &remove_item(&1, &2, item_id))
+    total_price_item_removed = Money.multiply(item_removed.item.price, item_removed.total_amount)
+    total_price = Money.subtract(cart.total_price, total_price_item_removed)
+
+    %{
+      cart
+      | items: items,
+        total_amount: cart.total_amount - item_removed.total_amount,
+        total_price: total_price
+    }
+  end
+
+  defp remove_item(element, accumulator, item_id) do
+    case element.item.id == item_id do
+      true ->
+        {list, _acc} = accumulator
+        {list, element}
+
+      false ->
+        {list, acc} = accumulator
+        {[element] ++ list, acc}
+    end
+  end
+
   defp new_item(items, item) do
     is_there_item_id? = Enum.find(items, &(&1.item.id == item.id))
 
