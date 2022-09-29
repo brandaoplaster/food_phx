@@ -9,7 +9,6 @@ defmodule FoodPhx.Carts.Core.HandleCartsTest do
     id: 1,
     items: [],
     total_amount: 0,
-    total_items: 0,
     total_price: %Money{amount: 0, currency: :BRL}
   }
 
@@ -19,14 +18,26 @@ defmodule FoodPhx.Carts.Core.HandleCartsTest do
     end
 
     test "should add a new item  in the car" do
-      product = insert(:produc)
+      product = insert(:product)
 
       cart = HandleCarts.add_new_cart(@start_cart, product)
 
       assert 1 == cart.total_amount
-      assert 1 == cart.total_items
-      assert [product] == cart.items
+      assert [%{item: product, total_amount: 1}] == cart.items
       assert product.price == cart.total_price
+    end
+
+    test "should add the same item twice" do
+      product = insert(:product)
+
+      cart =
+        @start_cart
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.add_new_cart(product)
+
+      assert 2 == cart.total_amount
+      assert [%{item: product, total_amount: 2}] == cart.items
+      assert Money.add(product.price, product.price) == cart.total_price
     end
   end
 end
