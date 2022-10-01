@@ -27,6 +27,24 @@ defmodule FoodPhx.Carts.Core.HandleCarts do
     }
   end
 
+  def increment(%{items: items} = cart, item_id) do
+    {item_update, product} =
+      Enum.reduce(items, {[], nil}, fn item, acc ->
+        if item.item.id == item_id do
+          {list, _product} = acc
+          update_item = %{item | total_amount: item.total_amount + 1}
+          item_update = [update_item]
+          {list ++ item_update, update_item}
+        else
+          {list, item_update} = acc
+          {[item] ++ list, item_update}
+        end
+      end)
+
+    total_price = Money.add(cart.total_price, product.item.price)
+    %{cart | items: item_update, total_amount: cart.total_amount + 1, total_price: total_price}
+  end
+
   defp remove_item(element, accumulator, item_id) do
     case element.item.id == item_id do
       true ->

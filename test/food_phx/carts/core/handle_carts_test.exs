@@ -51,7 +51,9 @@ defmodule FoodPhx.Carts.Core.HandleCartsTest do
         |> HandleCarts.add_new_cart(product_2)
 
       assert 3 == cart.total_amount
-      assert [%{item: product, total_amount: 2}, %{item: product_2, total_amount: 1}] == cart.items
+
+      assert [%{item: product, total_amount: 2}, %{item: product_2, total_amount: 1}] ==
+               cart.items
 
       assert Money.add(product.price, product.price)
              |> Money.add(product_2.price) == cart.total_price
@@ -61,6 +63,22 @@ defmodule FoodPhx.Carts.Core.HandleCartsTest do
       assert 1 == cart.total_amount
       assert product_2.price == cart.total_price
       assert [%{item: product_2, total_amount: 1}] == cart.items
+    end
+
+    test "should increment the same element into the cart" do
+      product = insert(:product)
+
+      cart =
+        @start_cart
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.increment(product.id)
+
+      assert 3 == cart.total_amount
+
+      assert product.price
+             |> Money.add(product.price)
+             |> Money.add(product.price) == cart.total_price
     end
   end
 end
