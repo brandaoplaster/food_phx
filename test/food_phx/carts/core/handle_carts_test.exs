@@ -80,5 +80,49 @@ defmodule FoodPhx.Carts.Core.HandleCartsTest do
              |> Money.add(product.price)
              |> Money.add(product.price) == cart.total_price
     end
+
+    test "should decrement the same element into the cart" do
+      product = insert(:product)
+
+      cart =
+        @start_cart
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.decrement(product.id)
+
+      assert 1 == cart.total_amount
+
+      assert product.price
+             |> Money.add(product.price)
+             |> Money.subtract(product.price) == cart.total_price
+    end
+
+    test "should decuntil remove the product" do
+      product = insert(:product)
+
+      cart =
+        @start_cart
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.decrement(product.id)
+        |> HandleCarts.decrement(product.id)
+
+      assert 0 == cart.total_amount
+      assert [] == cart.items
+      assert Money.new(0) == cart.total_price
+    end
+
+    test "should add two different items in the same cart" do
+      product = insert(:product)
+      product_2 = insert(:product)
+
+      cart =
+        @start_cart
+        |> HandleCarts.add_new_cart(product)
+        |> HandleCarts.add_new_cart(product_2)
+
+      assert 2 == cart.total_amount
+      assert Money.add(product.price, product_2.price) == cart.total_price
+    end
   end
 end
