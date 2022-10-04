@@ -3,7 +3,7 @@ defmodule FoodPhx.Carts.Boundary.CartSession do
 
   alias FoodPhx.Carts.Core.HandleCarts, as: Cart
 
-  def start_link(_), do: GenServer.start_link(__MODULE__, :cart_session, name: cart_session)
+  def start_link(_), do: GenServer.start_link(__MODULE__, :cart_session, name: :cart_session)
 
   def init(name) do
     :ets.new(name, [:set, :public, :named_table])
