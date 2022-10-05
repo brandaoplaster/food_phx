@@ -5,6 +5,8 @@ defmodule FoodPhx.Application do
 
   use Application
 
+  alias FoodPhx.Carts.Boundary.CartSession
+
   @impl true
   def start(_type, _args) do
     children = [
@@ -15,7 +17,8 @@ defmodule FoodPhx.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: FoodPhx.PubSub},
       # Start the Endpoint (http/https)
-      FoodPhxWeb.Endpoint
+      FoodPhxWeb.Endpoint,
+      CartSession
       # Start a worker by calling: FoodPhx.Worker.start_link(arg)
       # {FoodPhx.Worker, arg}
     ]
