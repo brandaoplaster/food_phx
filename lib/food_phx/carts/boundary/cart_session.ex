@@ -28,7 +28,7 @@ defmodule FoodPhx.Carts.Boundary.CartSession do
     {:noreply, name}
   end
 
-  def handle_call({:remove, cart_id, product_id}, name) do
+  def handle_call({:remove, cart_id, product_id}, _from, name) do
     {:ok, cart} = find_cart(name, cart_id)
     cart = Cart.remove(cart, product_id)
 
@@ -37,7 +37,7 @@ defmodule FoodPhx.Carts.Boundary.CartSession do
     {:reply, cart, name}
   end
 
-  def handle_call({:increment, cart_id, product_id}, name) do
+  def handle_call({:increment, cart_id, product_id}, _from, name) do
     {:ok, cart} = find_cart(name, cart_id)
     cart = Cart.increment(cart, product_id)
 
@@ -46,7 +46,7 @@ defmodule FoodPhx.Carts.Boundary.CartSession do
     {:reply, cart, name}
   end
 
-  def handle_call({:decrement, cart_id, product_id}, name) do
+  def handle_call({:decrement, cart_id, product_id}, _from, name) do
     {:ok, cart} = find_cart(name, cart_id)
     cart = Cart.decrement(cart, product_id)
 
@@ -55,7 +55,7 @@ defmodule FoodPhx.Carts.Boundary.CartSession do
     {:reply, cart, name}
   end
 
-  def handle_call({:get, cart_id}, name) do
+  def handle_call({:get, cart_id}, _from, name) do
     {:ok, cart} = find_cart(name, cart_id)
 
     {:reply, cart, name}
