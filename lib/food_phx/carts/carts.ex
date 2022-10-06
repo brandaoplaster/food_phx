@@ -9,7 +9,7 @@ defmodule FoodPhx.Carts do
     do: GenServer.call(:cart_session, {:get, cart_id})
 
   def add(cart_id, product),
-    do: GenServer.call(:cart_session, {:add, cart_id, product})
+    do: GenServer.cast(:cart_session, {:add, cart_id, product})
 
   def increment(cart_id, product_id),
     do: GenServer.call(:cart_session, {:increment, cart_id, product_id})
