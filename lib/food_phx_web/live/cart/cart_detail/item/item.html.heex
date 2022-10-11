@@ -1,0 +1,25 @@
+<div class="flex items-center my-8 p-2 shadow-lg" data-role="order-item" data-id={@id}>
+  <img src={Routes.static_path(@conn, "/images/product_1.jpg")} alt="" class="h-16" data-role="order-img" data-id={@id} />
+
+  <div class="flex-1 ml-4" data-role="order-item-detail">
+    <h1 data-role="order-name" data-id={@id}>
+      Product Name
+    </h1>
+    <span data-role="order-size" data-id={@id}>Product size</span>
+  </div>
+
+  <span class="flex-1" data-role="order-events" data-id={@id}>
+    <div class="flex items-center">
+      <button class="p-1 m-2 rounded-full text-white font-bold btn-primary" data-role="dec" data-id={@id}> - </button>
+      <div data-role="item-amount" data-id={@id}>
+        3 Item(s)
+      </div>
+      <button class="p-1 m-2 rounded-full text-white font-bold btn-primary" data-role="inc" data-id={@id}> + </button>
+    </div>
+  </span>
+
+  <span class="flex-1" data-role="order=detail" data-id={@id}>
+    <span class="font-bold text-lg" data-role="price" data-id={@id}>$ 10<span>
+    <button class="h-6 w-6 rounded-full text-white font-bold btn-primary" data-role="remove" data-id={@id}>&#times</button>
+  </span>
+</div>

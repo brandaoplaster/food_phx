@@ -34,6 +34,12 @@
           <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
         </li>
       <% end %>
+      <li class="ml-6" id="shopping-cart">
+        <%= link to: Routes.cart_path(@conn, :index), class: "inline-bock px-4 py-2 rounded-full items-center text-white" do %>
+          <span class="font-bold pr-2 text-xs">5</span>
+          <img src={Routes.static_path(@conn, "/images/cart.svg")} class="h-6 w-6" />
+        <% end %>
+      </li>
     </ul>
   </div>
 </nav>
