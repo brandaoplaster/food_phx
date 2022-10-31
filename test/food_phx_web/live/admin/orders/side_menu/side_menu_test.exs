@@ -9,6 +9,24 @@ defmodule FoodPhxWeb.Admin.Orders.SideMenuTest do
       {:ok, view, _html} = live(conn, Routes.admin_order_path(conn, :index))
       assert has_element?(view, "#side-menu")
       assert has_element?(view, "[data-role=side-title]", "Orders")
+
+      assert has_element?(view, "[data-role=all-orders]", "All")
+      assert has_element?(view, "[data-role=all-orders-amount]", "30")
+
+      assert has_element?(view, "[data-role=all-not-started]", "Not Started")
+      assert has_element?(view, "[data-role=all-not-started-amount]", "3")
+
+      assert has_element?(view, "[data-role=received]", "Received")
+      assert has_element?(view, "[data-role=received-amount]", "3")
+
+      assert has_element?(view, "[data-role=preparing]", "Preparing")
+      assert has_element?(view, "[data-role=preparing-amount]", "3")
+
+      assert has_element?(view, "[data-role=delivering]", "Delivering")
+      assert has_element?(view, "[data-role=delivering-amount]", "3")
+
+      assert has_element?(view, "[data-role=delivered]", "delivered")
+      assert has_element?(view, "[data-role=delivered-amount]", "3")
     end
   end
 end
