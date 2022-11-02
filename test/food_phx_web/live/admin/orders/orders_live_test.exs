@@ -8,6 +8,8 @@ defmodule FoodPhxWeb.Admin.OrdersLiveTest do
     test "render main element", %{conn: conn} do
       {:ok, view, _html} = live(conn, Routes.admin_order_path(conn, :index))
       assert has_element?(view, "#side-menu")
+
+      assert has_element?(view, "[data-role=layers]")
     end
   end
 end
