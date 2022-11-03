@@ -1,0 +1,19 @@
+<li class="block p-5 mb-5 bg-white rounded-md shadow" data-id={@id}>
+  <a href="#">
+    <div class="flex justify-between mb-2">
+      <p class="text-sm font-medium leading snug text-gray-900" data-role="card-number" data-id={@id}>
+        <%= @id %>
+      </p>
+      <span>
+        <img src={Routes.static_path(@socket, "/images/delivery.svg")} alt="" class="rounded-full h-16 w-16">
+      </span>
+    </div>
+
+    <hr />
+
+    <div>
+      <p class="text-sm p-2 font-medium leading-snug text-gray-900" data-role="order-items">
+      </p>
+    </div>
+  </a>
+</li>
