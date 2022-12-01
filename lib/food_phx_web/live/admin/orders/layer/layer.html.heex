@@ -3,6 +3,8 @@
     <%= humanize(@id) %>
   </h3>
   <ul class="mt-2" data-role="layer-card" data-id={@id}>
-
+    <%= for card <- @cards do %>
+      <.live_component module={Card} id={card.id} card={card} />
+    <% end %>>
   </ul>
 </div>

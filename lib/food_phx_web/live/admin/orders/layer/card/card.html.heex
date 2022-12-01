@@ -1,0 +1,78 @@
+<li class="block p-5 mb-5 bg-white rounded-md shadow" data-id={@id}>
+  <a href="#">
+    <div class="flex justify-between mb-2">
+      <p class="text-sm font-medium leading snug text-gray-900" data-role="card-number" data-id={@id}>
+        <%= @id %>
+      </p>
+      <span>
+        <img src={Routes.static_path(@socket, "/images/delivery.svg")} alt="" class="rounded-full h-16 w-16">
+      </span>
+    </div>
+
+    <hr />
+
+    <div>
+      <p class="text-sm p-2 font-medium leading-snug text-gray-900" data-role="list-items-title" data-id={@id}>
+        Orders Items
+      </p>
+      <ul data-role="list-items" data-id={@id}>
+        <%= for item <- @card.items do %>
+          <li class="text-sm mb-1 flex justify-between" data-role="item" data-id={@id <> item.id}>
+            <span data-role="item-description" data-id={@id <> item.id}>
+              <%= item.amount %> | <%= item.product.name %>
+            </span>
+            <span data-role="item-price" data-id={@id <> item.id}>
+              <%= item.product.price %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div>
+      <p class="text-sm p-2 font-medium leading-snug text-gray-900" data-role="list-description-title" data-id={@id}>
+        Orders Description
+      </p>
+
+      <ul class="text-xs">
+        <li class="flex justify-between mb-1">
+          <span data-role="total-price" data-id={@id}>
+            Total Price:
+          </span>
+          <span class="font-bold" data-role="total-price-amount" data-id={@id}>
+            <%= @card.total_price %>
+          </span>
+        </li>
+        <li class="flex justify-between mb-1">
+          <span data-role="total-amount" data-id={@id}>
+            Total Amount:
+          </span>
+          <span class="font-bold" data-role="total-amount" data-id={@id}>
+            <%= @card.total_amount %>
+          </span>
+        </li>
+        <li class="flex justify-between mb-1">
+          <span data-role="customer" data-id={@id}>
+            Total Amount:
+          </span>
+          <span class="font-bold" data-role="customer-amount" data-id={@id}>
+            <%= @card.user.email %>
+          </span>
+        </li>
+
+        <%= if @card.status == :DELIVERY do %>
+         <a href="#" class="flex justify-between mb-1 link">
+          <span class="primary" data-role="delivery-text">
+            Delivery at:
+          </span>
+          <span class="font-bold" data-role="delivery" data-id={@id}>
+          <%= @card.updated_at %>
+          </span>
+         </a>
+        <% end %>
+      </ul>
+    </div>    
+  </a>
+</li>
